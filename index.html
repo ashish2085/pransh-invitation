@@ -16,6 +16,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            overflow: hidden; /* Hide scrollbars from petal animation */
         }
         .font-tangerine {
             font-family: 'Tangerine', cursive;
@@ -42,14 +43,61 @@
         }
         .hidden-fade {
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s;
         }
         .visible-fade {
             opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes letterReveal {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animation Utility Classes */
+        .animate-on-load {
+            opacity: 0; /* Start hidden */
+        }
+        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .animate-scale-in { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+        
+        /* Letter animation styling */
+        .letter-anim span {
+            display: inline-block;
+            opacity: 0;
+            animation: letterReveal 0.5s forwards;
+        }
+
+        /* Petal Animation */
+        .petal {
+            position: absolute;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23ffb6c1"><path d="M10 3.22l-.61-.6a5.5 5.5 0 00-7.78 7.77L10 18.78l8.39-8.4a5.5 5.5 0 00-7.78-7.77l-.61.61z" /></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            top: -20px;
+            animation: fall linear infinite;
+            opacity: 0.7;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    
+    <div id="petal-container"></div>
 
     <!-- Entry Modal -->
     <div id="entryModal" class="fixed inset-0 bg-amber-800 bg-opacity-90 flex items-center justify-center p-4 z-50 cursor-pointer">
@@ -64,32 +112,41 @@
 
     <!-- Main Invitation Card -->
     <div id="mainContent" class="card-bg w-full max-w-2xl mx-auto rounded-2xl shadow-2xl border-4 border-amber-800/50 overflow-hidden hidden-fade">
+        
+        <!-- Mute Button -->
+        <div class="absolute top-4 right-4 z-10">
+            <button id="muteBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition focus:outline-none focus:ring-2 focus:ring-amber-500">
+                <svg id="unmuteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            </button>
+        </div>
+
         <div class="p-8 sm:p-12 text-center text-amber-900">
 
             <!-- Header -->
-            <header class="mb-6">
+            <header class="mb-6 animate-on-load">
                 <p class="font-marcellus text-xl tracking-wider">Join us for the</p>
-                <h1 class="font-tangerine text-6xl sm:text-7xl font-bold text-amber-800 my-2">Annaprashan</h1>
+                <h1 id="title-annaprashan" class="font-tangerine text-6xl sm:text-7xl font-bold text-amber-800 my-2 letter-anim">Annaprashan</h1>
                 <p class="font-marcellus text-xl tracking-wider">of our beloved son</p>
             </header>
 
             <!-- Image of Yashoda and Krishna -->
-            <div class="my-8">
+            <div class="my-8 animate-on-load">
                 <img src="https://i.pinimg.com/1200x/53/83/29/538329beb3a6ac9bb41d610e6267f76b.jpg" alt="Yashoda feeding Krishna" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-amber-200" onerror="this.onerror=null; this.src='https://placehold.co/192x192/FFF8E1/D2B48C?text=Pransh';">
             </div>
 
             <!-- Child's Name -->
-            <div class="mt-6 mb-8">
-                <h2 class="font-tangerine text-8xl sm:text-9xl font-bold text-amber-700">Pransh</h2>
+            <div class="mt-6 mb-8 animate-on-load">
+                <h2 id="title-pransh" class="font-tangerine text-8xl sm:text-9xl font-bold text-amber-700 letter-anim">Pransh</h2>
             </div>
 
             <!-- Invitation Message -->
-            <p class="font-marcellus max-w-md mx-auto text-lg leading-relaxed">
+            <p class="font-marcellus max-w-md mx-auto text-lg leading-relaxed animate-on-load">
                 We invite you to share our joy and bless our little one as he takes his first bite of solid food.
             </p>
 
             <!-- Event Details Section -->
-            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8 animate-on-load">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     <!-- Date & Time -->
                     <div class="text-left">
@@ -113,7 +170,7 @@
             </div>
 
             <!-- Dress Code -->
-            <div class="mt-8 text-center">
+            <div class="mt-8 text-center animate-on-load">
                 <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="m21.21 15.89-1.21-7.2 1.42-1.42a2 2 0 0 0 0-2.82l-1.17-1.17a2 2 0 0 0-2.82 0L16 4.71l-7.2-1.21a.5.5 0 0 0-.57.57l1.21 7.2-1.42 1.42a2 2 0 0 0 0 2.82l1.17 1.17a2 2 0 0 0 2.82 0L15.89 15l7.2 1.21a.5.5 0 0 0 .57-.57z"></path><path d="m11 4-2 2"></path><path d="m20 13-2 2"></path><path d="m5 19-2 2"></path></svg>
                     Dress Code
@@ -123,7 +180,7 @@
             </div>
 
             <!-- Traditional Blessing -->
-            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8 animate-on-load">
                  <p class="font-marcellus max-w-lg mx-auto text-md italic leading-relaxed">
                     "Annam Brahma, Raso Vishnu, Bhokta Devo Maheshwarah. Evam Jnatwaa Tu Bhoktavyam Annam Dosh Niwaram."
                 </p>
@@ -133,7 +190,7 @@
             </div>
 
             <!-- Gemini API Feature: Blessing Generator -->
-            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8 animate-on-load">
                 <h3 class="font-marcellus text-2xl font-bold mb-2">Looking for the right words?</h3>
                 <p class="font-marcellus max-w-md mx-auto text-md leading-relaxed mb-4">
                     Let our AI assistant help you craft the perfect blessing for Pransh.
@@ -144,7 +201,7 @@
             </div>
 
             <!-- Countdown Timer -->
-            <div id="countdown" class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 text-amber-800">
+            <div id="countdown" class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 text-amber-800 animate-on-load">
                 <div class="countdown-box p-4 rounded-lg"><div id="days" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Days</div></div>
                 <div class="countdown-box p-4 rounded-lg"><div id="hours" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Hours</div></div>
                 <div class="countdown-box p-4 rounded-lg"><div id="minutes" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Minutes</div></div>
@@ -154,7 +211,7 @@
 
 
             <!-- Action Buttons -->
-            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-on-load">
                 <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md">Add to Calendar</a>
                 <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md">View on Map</a>
             </div>
@@ -162,7 +219,7 @@
         </div>
 
         <!-- Footer -->
-        <footer class="bg-amber-800/10 p-6 text-center">
+        <footer class="bg-amber-800/10 p-6 text-center animate-on-load">
             <p class="font-marcellus text-lg">With love and joy,</p>
             <p class="font-marcellus text-xl font-semibold text-amber-800">Mrs. Priyanka & Mr. Ashish Kumar</p>
             <p class="font-marcellus text-md text-amber-800/80 mt-2">Contact: +91 7209412085</p>
@@ -204,6 +261,9 @@
             const enterBtn = document.getElementById('enterBtn');
             const mainContent = document.getElementById('mainContent');
             const backgroundMusic = document.getElementById('background-music');
+            const muteBtn = document.getElementById('muteBtn');
+            const unmuteIcon = document.getElementById('unmuteIcon');
+            const muteIcon = document.getElementById('muteIcon');
 
             // --- COUNTDOWN TIMER LOGIC ---
             const countdownDate = new Date("September 10, 2025 11:00:00").getTime();
@@ -327,23 +387,71 @@
                 }, 2000);
             }
 
-            // --- BACKGROUND MUSIC ---
+            // --- LETTER ANIMATION FUNCTION ---
+            function animateLetters(element) {
+                const text = element.innerText;
+                element.innerHTML = '';
+                text.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.innerText = char;
+                    if (char === ' ') {
+                        span.innerHTML = '&nbsp;';
+                    }
+                    span.style.animationDelay = `${index * 0.05}s`;
+                    element.appendChild(span);
+                });
+            }
+
+            // --- ENTRY & ANIMATION LOGIC ---
             enterBtn.addEventListener('click', () => {
-                // Fade out the entry modal
                 entryModal.style.opacity = '0';
                 setTimeout(() => {
                     entryModal.style.display = 'none';
                 }, 300);
 
-                // Fade in the main content
                 mainContent.classList.remove('hidden-fade');
-                mainContent.classList.add('visible-fade');
+                mainContent.classList.add('visible-fade', 'animate-slide-up');
+                
+                animateLetters(document.getElementById('title-annaprashan'));
+                animateLetters(document.getElementById('title-pransh'));
 
-                // Play the background music
+                const animatedElements = mainContent.querySelectorAll('.animate-on-load');
+                animatedElements.forEach((el, index) => {
+                    let animationClass = 'animate-slide-up';
+                    if (el.querySelector('img')) {
+                         animationClass = 'animate-fade-in';
+                    }
+                    el.style.animationDelay = `${index * 0.15 + 0.5}s`;
+                    el.classList.add(animationClass);
+                });
+
                 backgroundMusic.play().catch(error => {
                     console.error("Audio playback failed:", error);
                 });
+
+                createPetals();
             });
+            
+            // --- MUTE BUTTON LOGIC ---
+            muteBtn.addEventListener('click', () => {
+                backgroundMusic.muted = !backgroundMusic.muted;
+                muteIcon.classList.toggle('hidden');
+                unmuteIcon.classList.toggle('hidden');
+            });
+
+            // --- PETAL ANIMATION ---
+            function createPetals() {
+                const container = document.getElementById('petal-container');
+                const petalCount = 20;
+                for (let i = 0; i < petalCount; i++) {
+                    const petal = document.createElement('div');
+                    petal.classList.add('petal');
+                    petal.style.left = `${Math.random() * 100}vw`;
+                    petal.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                    petal.style.animationDelay = `${Math.random() * 5}s`;
+                    container.appendChild(petal);
+                }
+            }
         });
     </script>
 
