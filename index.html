@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annaprashan Ceremony of Pransh</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tone.js script removed as it's no longer needed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tangerine:wght@700&family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tangerine:wght@700&family=Marcellus&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -23,6 +22,9 @@
         }
         .font-marcellus {
             font-family: 'Marcellus', serif;
+        }
+        .font-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
         }
         .card-bg {
             background-color: rgba(255, 255, 255, 0.95);
@@ -113,8 +115,11 @@
     <!-- Main Invitation Card -->
     <div id="mainContent" class="card-bg w-full max-w-2xl mx-auto rounded-2xl shadow-2xl border-4 border-amber-800/50 overflow-hidden hidden-fade">
         
-        <!-- Mute Button -->
-        <div class="absolute top-4 right-4 z-10">
+        <!-- Controls -->
+        <div class="absolute top-4 right-4 z-10 flex gap-2">
+            <!-- Language Toggle -->
+            <button id="langToggleBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-sm">EN</button>
+            <!-- Mute Button -->
             <button id="muteBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition focus:outline-none focus:ring-2 focus:ring-amber-500">
                 <svg id="unmuteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                 <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
@@ -125,9 +130,9 @@
 
             <!-- Header -->
             <header class="mb-6 animate-on-load">
-                <p class="font-marcellus text-xl tracking-wider">Join us for the</p>
-                <h1 id="title-annaprashan" class="font-tangerine text-6xl sm:text-7xl font-bold text-amber-800 my-2 letter-anim">Annaprashan</h1>
-                <p class="font-marcellus text-xl tracking-wider">of our beloved son</p>
+                <p class="font-marcellus text-xl tracking-wider" data-lang-en="Join us for the" data-lang-hi="हमारे इस खुशी के अवसर पर शामिल हों">Join us for the</p>
+                <h1 id="title-annaprashan" class="font-tangerine text-6xl sm:text-7xl font-bold text-amber-800 my-2 letter-anim" data-lang-en="Annaprashan" data-lang-hi="अन्नप्राशन">Annaprashan</h1>
+                <p class="font-marcellus text-xl tracking-wider" data-lang-en="of our beloved son" data-lang-hi="हमारे प्यारे बेटे के">of our beloved son</p>
             </header>
 
             <!-- Image of Yashoda and Krishna -->
@@ -137,11 +142,11 @@
 
             <!-- Child's Name -->
             <div class="mt-6 mb-8 animate-on-load">
-                <h2 id="title-pransh" class="font-tangerine text-8xl sm:text-9xl font-bold text-amber-700 letter-anim">Pransh</h2>
+                <h2 id="title-pransh" class="font-tangerine text-8xl sm:text-9xl font-bold text-amber-700 letter-anim" data-lang-en="Pransh" data-lang-hi="प्रांश">Pransh</h2>
             </div>
 
             <!-- Invitation Message -->
-            <p class="font-marcellus max-w-md mx-auto text-lg leading-relaxed animate-on-load">
+            <p class="font-marcellus max-w-md mx-auto text-lg leading-relaxed animate-on-load" data-lang-en="We invite you to share our joy and bless our little one as he takes his first bite of solid food." data-lang-hi="हम आपको हमारी खुशी साझा करने और हमारे नन्हे-मुन्ने को आशीर्वाद देने के लिए आमंत्रित करते हैं क्योंकि वह अपना पहला ठोस भोजन ग्रहण कर रहा है।">
                 We invite you to share our joy and bless our little one as he takes his first bite of solid food.
             </p>
 
@@ -150,33 +155,33 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     <!-- Date & Time -->
                     <div class="text-left">
-                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center">
+                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center" data-lang-en="Date & Time" data-lang-hi="दिनांक और समय">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            Date & Time
+                            <span class="lang-switch">Date & Time</span>
                         </h3>
-                        <p class="text-lg ml-9"><strong>September 10, 2025</strong></p>
-                        <p class="text-md ml-9">11:00 AM onwards</p>
+                        <p class="text-lg ml-9" data-lang-en="<strong>September 10, 2025</strong>" data-lang-hi="<strong>१० सितंबर, २०२५</strong>"><strong>September 10, 2025</strong></p>
+                        <p class="text-md ml-9" data-lang-en="11:00 AM onwards" data-lang-hi="सुबह ११:०० बजे से">11:00 AM onwards</p>
                     </div>
                     <!-- Venue -->
                     <div class="text-left">
-                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center">
+                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center" data-lang-en="Venue" data-lang-hi="स्थान">
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            Venue
+                             <span class="lang-switch">Venue</span>
                         </h3>
-                        <p class="text-lg ml-9"><strong>Manorama Marriage Hall</strong></p>
-                        <p class="text-md ml-9">G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343</p>
+                        <p class="text-lg ml-9" data-lang-en="<strong>Manorama Marriage Hall</strong>" data-lang-hi="<strong>मनोरमा मैरिज हॉल</strong>"><strong>Manorama Marriage Hall</strong></p>
+                        <p class="text-md ml-9" data-lang-en="G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343" data-lang-hi="जी.टी. रोड कुल्टी, कुल्टी कॉलेज बस स्टैंड के पास, कुल्टी - ७१३३४३">G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343</p>
                     </div>
                 </div>
             </div>
 
             <!-- Dress Code -->
             <div class="mt-8 text-center animate-on-load">
-                <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center justify-center">
+                <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center justify-center" data-lang-en="Dress Code" data-lang-hi="ड्रेस कोड">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="m21.21 15.89-1.21-7.2 1.42-1.42a2 2 0 0 0 0-2.82l-1.17-1.17a2 2 0 0 0-2.82 0L16 4.71l-7.2-1.21a.5.5 0 0 0-.57.57l1.21 7.2-1.42 1.42a2 2 0 0 0 0 2.82l1.17 1.17a2 2 0 0 0 2.82 0L15.89 15l7.2 1.21a.5.5 0 0 0 .57-.57z"></path><path d="m11 4-2 2"></path><path d="m20 13-2 2"></path><path d="m5 19-2 2"></path></svg>
-                    Dress Code
+                    <span class="lang-switch">Dress Code</span>
                 </h3>
-                <p class="text-lg">Traditional or Smart Casual</p>
-                <p class="text-md">Bright colors welcome, please avoid black attire</p>
+                <p class="text-lg" data-lang-en="Traditional or Smart Casual" data-lang-hi="पारंपरिक या स्मार्ट कैजुअल">Traditional or Smart Casual</p>
+                <p class="text-md" data-lang-en="Bright colors welcome, please avoid black attire" data-lang-hi="चमकीले रंगों का स्वागत है, काले परिधान से बचें">Bright colors welcome, please avoid black attire</p>
             </div>
 
             <!-- Traditional Blessing -->
@@ -184,45 +189,45 @@
                  <p class="font-marcellus max-w-lg mx-auto text-md italic leading-relaxed">
                     "Annam Brahma, Raso Vishnu, Bhokta Devo Maheshwarah. Evam Jnatwaa Tu Bhoktavyam Annam Dosh Niwaram."
                 </p>
-                <p class="font-marcellus max-w-lg mx-auto text-md leading-relaxed mt-4">
+                <p class="font-marcellus max-w-lg mx-auto text-md leading-relaxed mt-4" data-lang-en="Just as Mother Yashoda lovingly nourished baby Krishna, we celebrate this sacred moment when our precious child receives their first taste of kheer, blessed by divine grace and surrounded by the abundance of traditional foods and the love of family." data-lang-hi="जैसे माता यशोदा ने बाल कृष्ण को प्यार से पोषित किया, वैसे ही हम इस पवित्र क्षण का जश्न मनाते हैं जब हमारा अनमोल बच्चा दिव्य कृपा से धन्य और पारंपरिक खाद्य पदार्थों और परिवार के प्यार से घिरा हुआ खीर का अपना पहला स्वाद चखता है।">
                     Just as Mother Yashoda lovingly nourished baby Krishna, we celebrate this sacred moment when our precious child receives their first taste of kheer, blessed by divine grace and surrounded by the abundance of traditional foods and the love of family.
                 </p>
             </div>
 
             <!-- Gemini API Feature: Blessing Generator -->
             <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8 animate-on-load">
-                <h3 class="font-marcellus text-2xl font-bold mb-2">Looking for the right words?</h3>
-                <p class="font-marcellus max-w-md mx-auto text-md leading-relaxed mb-4">
+                <h3 class="font-marcellus text-2xl font-bold mb-2" data-lang-en="Looking for the right words?" data-lang-hi="सही शब्दों की तलाश में हैं?">Looking for the right words?</h3>
+                <p class="font-marcellus max-w-md mx-auto text-md leading-relaxed mb-4" data-lang-en="Let our AI assistant help you craft the perfect blessing for Pransh." data-lang-hi="हमारे एआई सहायक को प्रांश के लिए आदर्श आशीर्वाद तैयार करने में आपकी मदद करने दें।">
                     Let our AI assistant help you craft the perfect blessing for Pransh.
                 </p>
-                <button id="generateBlessingBtn" class="bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md">
+                <button id="generateBlessingBtn" class="bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md" data-lang-en="✨ Generate a Blessing" data-lang-hi="✨ आशीर्वाद उत्पन्न करें">
                     ✨ Generate a Blessing
                 </button>
             </div>
 
             <!-- Countdown Timer -->
             <div id="countdown" class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 text-amber-800 animate-on-load">
-                <div class="countdown-box p-4 rounded-lg"><div id="days" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Days</div></div>
-                <div class="countdown-box p-4 rounded-lg"><div id="hours" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Hours</div></div>
-                <div class="countdown-box p-4 rounded-lg"><div id="minutes" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Minutes</div></div>
-                <div class="countdown-box p-4 rounded-lg"><div id="seconds" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Seconds</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="days" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus" data-lang-en="Days" data-lang-hi="दिन">Days</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="hours" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus" data-lang-en="Hours" data-lang-hi="घंटे">Hours</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="minutes" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus" data-lang-en="Minutes" data-lang-hi="मिनट">Minutes</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="seconds" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus" data-lang-en="Seconds" data-lang-hi="सेकंड">Seconds</div></div>
             </div>
-             <div id="eventPassed" class="hidden mt-10 text-xl font-marcellus text-amber-800">The auspicious day has arrived!</div>
+             <div id="eventPassed" class="hidden mt-10 text-xl font-marcellus text-amber-800" data-lang-en="The auspicious day has arrived!" data-lang-hi="शुभ दिन आ गया है!">The auspicious day has arrived!</div>
 
 
             <!-- Action Buttons -->
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-on-load">
-                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md">Add to Calendar</a>
-                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md">View on Map</a>
+                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md" data-lang-en="Add to Calendar" data-lang-hi="कैलेंडर में जोड़ें">Add to Calendar</a>
+                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md" data-lang-en="View on Map" data-lang-hi="नक्शे पर देखें">View on Map</a>
             </div>
 
         </div>
 
         <!-- Footer -->
         <footer class="bg-amber-800/10 p-6 text-center animate-on-load">
-            <p class="font-marcellus text-lg">With love and joy,</p>
-            <p class="font-marcellus text-xl font-semibold text-amber-800">Mrs. Priyanka & Mr. Ashish Kumar</p>
-            <p class="font-marcellus text-md text-amber-800/80 mt-2">Contact: +91 7209412085</p>
+            <p class="font-marcellus text-lg" data-lang-en="With love and joy," data-lang-hi="प्यार और खुशी के साथ,">With love and joy,</p>
+            <p class="text-xl font-semibold text-amber-800" data-lang-en="Mrs. Priyanka & Mr. Ashish Kumar" data-lang-hi="श्रीमती प्रियंका एवं श्री आशीष कुमार">Mrs. Priyanka & Mr. Ashish Kumar</p>
+            <p class="font-marcellus text-md text-amber-800/80 mt-2" data-lang-en="Contact: +91 7209412085" data-lang-hi="संपर्क: +९१ ७२०९४१२०८५">Contact: +91 7209412085</p>
         </footer>
     </div>
 
@@ -264,6 +269,9 @@
             const muteBtn = document.getElementById('muteBtn');
             const unmuteIcon = document.getElementById('unmuteIcon');
             const muteIcon = document.getElementById('muteIcon');
+            const langToggleBtn = document.getElementById('langToggleBtn');
+
+            let currentLang = 'en';
 
             // --- COUNTDOWN TIMER LOGIC ---
             const countdownDate = new Date("September 10, 2025 11:00:00").getTime();
@@ -402,6 +410,57 @@
                 });
             }
 
+            // --- LANGUAGE SWITCH LOGIC ---
+            function switchLanguage(lang) {
+                mainContent.style.transition = 'opacity 0.4s ease-in-out';
+                mainContent.style.opacity = '0';
+
+                setTimeout(() => {
+                    const elements = document.querySelectorAll('[data-lang-en]');
+                    elements.forEach(el => {
+                        const text = el.getAttribute(`data-lang-${lang}`);
+                        const target = el.querySelector('.lang-switch') || el;
+                        target.innerHTML = text;
+                        
+                        // Handle font switching for specific elements
+                        const isTitle = el.id === 'title-annaprashan';
+                        const isName = el.id === 'title-pransh';
+                        const isFooterName = el.dataset.langEn === "Mrs. Priyanka & Mr. Ashish Kumar";
+
+                        el.classList.remove('font-tangerine', 'font-hindi', 'font-marcellus');
+                        
+                        if (lang === 'hi') {
+                            if (isTitle || isFooterName) {
+                                el.classList.add('font-hindi');
+                            } else if (isName) {
+                                el.classList.add('font-tangerine'); // Pransh stays Tangerine
+                            } else {
+                                el.classList.add('font-marcellus');
+                            }
+                        } else { // lang === 'en'
+                             if (isTitle) {
+                                el.classList.add('font-tangerine');
+                            } else if (isName) {
+                                el.classList.add('font-tangerine');
+                            } else if (isFooterName) {
+                                el.classList.add('font-marcellus'); // Back to Marcellus for English
+                            } else {
+                                el.classList.add('font-marcellus');
+                            }
+                        }
+                    });
+                    mainContent.style.opacity = '1';
+                }, 400);
+
+                currentLang = lang;
+                langToggleBtn.innerText = lang === 'en' ? 'HI' : 'EN';
+            }
+
+
+            langToggleBtn.addEventListener('click', () => {
+                switchLanguage(currentLang === 'en' ? 'hi' : 'en');
+            });
+
             // --- ENTRY & ANIMATION LOGIC ---
             enterBtn.addEventListener('click', () => {
                 entryModal.style.opacity = '0';
@@ -430,6 +489,11 @@
                 });
 
                 createPetals();
+
+                // Set timer to switch to Hindi
+                setTimeout(() => {
+                    switchLanguage('hi');
+                }, 45000);
             });
             
             // --- MUTE BUTTON LOGIC ---
