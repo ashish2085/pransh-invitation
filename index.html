@@ -31,6 +31,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg width='84' height='48' viewBox='0 0 84 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h12v12H0V0zm24 0h12v12H24V0zm24 0h12v12H48V0zm24 0h12v12H72V0zM12 12h12v12H12V12zm24 0h12v12H36V12zm24 0h12v12H60V12zm24 0h12v12H84V12zm-60 12h12v12H24V24zm24 0h12v12H48V24zm24 0h12v12H72V24zM12 36h12v12H12V36zm24 0h12v12H36V36zm24 0h12v12H60V36zm24 0h12v12H84V36z' fill='%23D2B48C' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         .countdown-box {
             background: rgba(255, 255, 255, 0.7);
@@ -61,6 +62,10 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
 
         /* Animation Utility Classes */
         .animate-on-load {
@@ -69,6 +74,7 @@
         .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         .animate-scale-in { animation: scaleIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+        .animate-pulse-gentle { animation: gentlePulse 5s ease-in-out infinite; }
         
         /* Letter animation styling */
         .letter-anim span {
@@ -118,9 +124,9 @@
         <!-- Controls -->
         <div class="absolute top-4 right-4 z-10 flex gap-2">
             <!-- Language Toggle -->
-            <button id="langToggleBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-sm">EN</button>
+            <button id="langToggleBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-500 font-bold text-sm">EN</button>
             <!-- Mute Button -->
-            <button id="muteBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <button id="muteBtn" class="w-12 h-12 bg-amber-800/80 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-amber-900 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-500">
                 <svg id="unmuteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                 <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
             </button>
@@ -137,7 +143,7 @@
 
             <!-- Image of Yashoda and Krishna -->
             <div class="my-8 animate-on-load">
-                <img src="https://i.pinimg.com/1200x/53/83/29/538329beb3a6ac9bb41d610e6267f76b.jpg" alt="Yashoda feeding Krishna" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-amber-200" onerror="this.onerror=null; this.src='https://placehold.co/192x192/FFF8E1/D2B48C?text=Pransh';">
+                <img src="https://i.pinimg.com/1200x/53/83/29/538329beb3a6ac9bb41d610e6267f76b.jpg" alt="Yashoda feeding Krishna" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-amber-200 animate-pulse-gentle" onerror="this.onerror=null; this.src='https://placehold.co/192x192/FFF8E1/D2B48C?text=Pransh';">
             </div>
 
             <!-- Child's Name -->
@@ -200,7 +206,7 @@
                 <p class="font-marcellus max-w-md mx-auto text-md leading-relaxed mb-4" data-lang-en="Let our AI assistant help you craft the perfect blessing for Pransh." data-lang-hi="हमारे एआई सहायक को प्रांश के लिए आदर्श आशीर्वाद तैयार करने में आपकी मदद करने दें।">
                     Let our AI assistant help you craft the perfect blessing for Pransh.
                 </p>
-                <button id="generateBlessingBtn" class="bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md" data-lang-en="✨ Generate a Blessing" data-lang-hi="✨ आशीर्वाद उत्पन्न करें">
+                <button id="generateBlessingBtn" class="bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition-transform hover:scale-105 duration-300 shadow-md" data-lang-en="✨ Generate a Blessing" data-lang-hi="✨ आशीर्वाद उत्पन्न करें">
                     ✨ Generate a Blessing
                 </button>
             </div>
@@ -217,8 +223,8 @@
 
             <!-- Action Buttons -->
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-on-load">
-                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md font-marcellus" data-lang-en="Add to Calendar" data-lang-hi="कैलेंडर में जोड़ें">Add to Calendar</a>
-                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md font-marcellus" data-lang-en="View on Map" data-lang-hi="नक्शे पर देखें">View on Map</a>
+                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition-transform hover:scale-105 duration-300 shadow-md font-marcellus" data-lang-en="Add to Calendar" data-lang-hi="कैलेंडर में जोड़ें">Add to Calendar</a>
+                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition-transform hover:scale-105 duration-300 shadow-md font-marcellus" data-lang-en="View on Map" data-lang-hi="नक्शे पर देखें">View on Map</a>
             </div>
 
         </div>
@@ -320,11 +326,10 @@
                 blessingOutput.appendChild(loadingSpinner);
                 const prompt = "Generate a short, warm, and heartfelt blessing (around 30-50 words) for a baby boy named Pransh on his Annaprashan (first rice-eating ceremony). The tone should be joyous and auspicious.";
                 try {
-                    let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
-                    const payload = { contents: chatHistory };
-                    const apiKey = "";
+                    // NOTE: This requires a valid API key to function when deployed.
+                    const apiKey = "AIzaSyBqPrWge3ac8H7wwlLFIxbcs945odoNPik"; // The environment will handle the key.
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
                     if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
                     const result = await response.json();
                     let blessingText = "May your life be filled with endless joy and delicious adventures. Happy Annaprashan!";
