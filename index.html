@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annaprashan Ceremony of Pransh</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tangerine:wght@700&family=Marcellus&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/watercolor.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .font-tangerine {
+            font-family: 'Tangerine', cursive;
+        }
+        .font-marcellus {
+            font-family: 'Marcellus', serif;
+        }
+        .card-bg {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+        }
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(210, 180, 140, 0.3);
+        }
+        /* Modal styles */
+        #blessingModal, #entryModal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .hidden-fade {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .visible-fade {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+
+    <!-- Entry Modal -->
+    <div id="entryModal" class="fixed inset-0 bg-amber-800 bg-opacity-90 flex items-center justify-center p-4 z-50 cursor-pointer">
+        <div class="text-center text-white">
+            <h2 class="font-tangerine text-6xl mb-2">You're Invited</h2>
+            <p class="font-marcellus text-xl mb-6">to the Annaprashan of Pransh</p>
+            <button id="enterBtn" class="bg-white text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-amber-100 transition duration-300 shadow-lg animate-pulse">
+                Click to Enter
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Invitation Card -->
+    <div id="mainContent" class="card-bg w-full max-w-2xl mx-auto rounded-2xl shadow-2xl border-4 border-amber-800/50 overflow-hidden hidden-fade">
+        <div class="p-8 sm:p-12 text-center text-amber-900">
+
+            <!-- Header -->
+            <header class="mb-6">
+                <p class="font-marcellus text-xl tracking-wider">Join us for the</p>
+                <h1 class="font-tangerine text-6xl sm:text-7xl font-bold text-amber-800 my-2">Annaprashan</h1>
+                <p class="font-marcellus text-xl tracking-wider">of our beloved son</p>
+            </header>
+
+            <!-- Image of Yashoda and Krishna -->
+            <div class="my-8">
+                <img src="https://i.pinimg.com/1200x/53/83/29/538329beb3a6ac9bb41d610e6267f76b.jpg" alt="Yashoda feeding Krishna" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-amber-200" onerror="this.onerror=null; this.src='https://placehold.co/192x192/FFF8E1/D2B48C?text=Pransh';">
+            </div>
+
+            <!-- Child's Name -->
+            <div class="mt-6 mb-8">
+                <h2 class="font-tangerine text-8xl sm:text-9xl font-bold text-amber-700">Pransh</h2>
+            </div>
+
+            <!-- Invitation Message -->
+            <p class="font-marcellus max-w-md mx-auto text-lg leading-relaxed">
+                We invite you to share our joy and bless our little one as he takes his first bite of solid food.
+            </p>
+
+            <!-- Event Details Section -->
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <!-- Date & Time -->
+                    <div class="text-left">
+                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            Date & Time
+                        </h3>
+                        <p class="text-lg ml-9"><strong>September 10, 2025</strong></p>
+                        <p class="text-md ml-9">11:00 AM onwards</p>
+                    </div>
+                    <!-- Venue -->
+                    <div class="text-left">
+                        <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Venue
+                        </h3>
+                        <p class="text-lg ml-9"><strong>Manorama Marriage Hall</strong></p>
+                        <p class="text-md ml-9">G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dress Code -->
+            <div class="mt-8 text-center">
+                <h3 class="font-marcellus text-2xl font-bold mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="m21.21 15.89-1.21-7.2 1.42-1.42a2 2 0 0 0 0-2.82l-1.17-1.17a2 2 0 0 0-2.82 0L16 4.71l-7.2-1.21a.5.5 0 0 0-.57.57l1.21 7.2-1.42 1.42a2 2 0 0 0 0 2.82l1.17 1.17a2 2 0 0 0 2.82 0L15.89 15l7.2 1.21a.5.5 0 0 0 .57-.57z"></path><path d="m11 4-2 2"></path><path d="m20 13-2 2"></path><path d="m5 19-2 2"></path></svg>
+                    Dress Code
+                </h3>
+                <p class="text-lg">Traditional or Smart Casual</p>
+                <p class="text-md">Bright colors welcome, please avoid black attire</p>
+            </div>
+
+            <!-- Traditional Blessing -->
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+                 <p class="font-marcellus max-w-lg mx-auto text-md italic leading-relaxed">
+                    "Annam Brahma, Raso Vishnu, Bhokta Devo Maheshwarah. Evam Jnatwaa Tu Bhoktavyam Annam Dosh Niwaram."
+                </p>
+                <p class="font-marcellus max-w-lg mx-auto text-md leading-relaxed mt-4">
+                    Just as Mother Yashoda lovingly nourished baby Krishna, we celebrate this sacred moment when our precious child receives their first taste of kheer, blessed by divine grace and surrounded by the abundance of traditional foods and the love of family.
+                </p>
+            </div>
+
+            <!-- Gemini API Feature: Blessing Generator -->
+            <div class="mt-10 border-t-2 border-dashed border-amber-800/30 pt-8">
+                <h3 class="font-marcellus text-2xl font-bold mb-2">Looking for the right words?</h3>
+                <p class="font-marcellus max-w-md mx-auto text-md leading-relaxed mb-4">
+                    Let our AI assistant help you craft the perfect blessing for Pransh.
+                </p>
+                <button id="generateBlessingBtn" class="bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md">
+                    ✨ Generate a Blessing
+                </button>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div id="countdown" class="mt-10 grid grid-cols-4 gap-2 sm:gap-4 text-amber-800">
+                <div class="countdown-box p-4 rounded-lg"><div id="days" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Days</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="hours" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Hours</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="minutes" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Minutes</div></div>
+                <div class="countdown-box p-4 rounded-lg"><div id="seconds" class="text-3xl sm:text-4xl font-bold">00</div><div class="text-xs sm:text-sm font-marcellus">Seconds</div></div>
+            </div>
+             <div id="eventPassed" class="hidden mt-10 text-xl font-marcellus text-amber-800">The auspicious day has arrived!</div>
+
+
+            <!-- Action Buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md">Add to Calendar</a>
+                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md">View on Map</a>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-amber-800/10 p-6 text-center">
+            <p class="font-marcellus text-lg">With love and joy,</p>
+            <p class="font-marcellus text-xl font-semibold text-amber-800">Mrs. Priyanka & Mr. Ashish Kumar</p>
+            <p class="font-marcellus text-md text-amber-800/80 mt-2">Contact: +91 7209412085</p>
+        </footer>
+    </div>
+
+    <!-- Blessing Modal -->
+    <div id="blessingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full modal-content">
+            <h3 class="font-marcellus text-2xl font-bold mb-4 text-amber-800">A Blessing for Pransh</h3>
+            <div id="blessingOutput" class="text-lg text-gray-700 mb-6 min-h-[100px]">
+                <!-- Loading spinner -->
+                <div id="loadingSpinner" class="flex justify-center items-center h-full">
+                    <svg class="animate-spin h-8 w-8 text-amber-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <button id="copyBlessingBtn" class="bg-gray-200 text-amber-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">Copy</button>
+                <div class="flex gap-2">
+                    <button id="generateAnotherBtn" class="bg-amber-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-900 transition duration-300">Another</button>
+                    <button id="closeModalBtn" class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Close</button>
+                </div>
+            </div>
+            <div id="copyFeedback" class="text-center text-green-600 mt-2 text-sm opacity-0 transition-opacity duration-300">Copied to clipboard!</div>
+        </div>
+    </div>
+
+
+    <script>
+        window.addEventListener('load', () => {
+            // --- ELEMENTS ---
+            const entryModal = document.getElementById('entryModal');
+            const enterBtn = document.getElementById('enterBtn');
+            const mainContent = document.getElementById('mainContent');
+
+            // --- COUNTDOWN TIMER LOGIC ---
+            const countdownDate = new Date("September 10, 2025 11:00:00").getTime();
+            const countdownFunction = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+                if (distance > 0) {
+                    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                } else {
+                    clearInterval(countdownFunction);
+                    document.getElementById("countdown").classList.add('hidden');
+                    document.getElementById("eventPassed").classList.remove('hidden');
+                }
+            }, 1000);
+
+            // --- ADD TO CALENDAR LOGIC ---
+            function generateCalendarLink() {
+                const title = encodeURIComponent("Annaprashan of Pransh");
+                const startTime = "20250910T053000Z";
+                const endTime = "20250910T093000Z";
+                const details = encodeURIComponent("Celebrating the rice-feeding ceremony of Pransh, son of Mrs. Priyanka and Mr. Ashish Kumar.");
+                const location = encodeURIComponent("Manorama Marriage Hall, G.T Road Kulti, Near Kulti College Bus Stand, Kulti 713343");
+                const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&location=${location}`;
+                document.getElementById('addToCalendar').href = googleCalendarUrl;
+            }
+            generateCalendarLink();
+
+            // --- GEMINI API BLESSING GENERATOR ---
+            const generateBlessingBtn = document.getElementById('generateBlessingBtn');
+            const blessingModal = document.getElementById('blessingModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const blessingOutput = document.getElementById('blessingOutput');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const copyBlessingBtn = document.getElementById('copyBlessingBtn');
+            const generateAnotherBtn = document.getElementById('generateAnotherBtn');
+            const copyFeedback = document.getElementById('copyFeedback');
+            const modalContent = blessingModal ? blessingModal.querySelector('.modal-content') : null;
+
+            async function fetchBlessing() {
+                if (!blessingOutput || !loadingSpinner) return;
+                blessingOutput.innerHTML = '';
+                loadingSpinner.style.display = 'flex';
+                blessingOutput.appendChild(loadingSpinner);
+                const prompt = "Generate a short, warm, and heartfelt blessing (around 30-50 words) for a baby boy named Pransh on his Annaprashan (first rice-eating ceremony). The tone should be joyous and auspicious.";
+                try {
+                    let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                    const payload = { contents: chatHistory };
+                    const apiKey = "";
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
+                    const result = await response.json();
+                    let blessingText = "May your life be filled with endless joy and delicious adventures. Happy Annaprashan!";
+                    if (result.candidates && result.candidates[0]?.content?.parts?.[0]) {
+                        blessingText = result.candidates[0].content.parts[0].text;
+                    }
+                    loadingSpinner.style.display = 'none';
+                    blessingOutput.innerText = blessingText;
+                } catch (error) {
+                    console.error("Error fetching blessing:", error);
+                    loadingSpinner.style.display = 'none';
+                    blessingOutput.innerText = "Could not generate a blessing at this time. Please try again later.";
+                }
+            }
+            
+            generateBlessingBtn.addEventListener('click', () => {
+                if (!blessingModal || !modalContent) return;
+                blessingModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                blessingModal.style.opacity = '0';
+                modalContent.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    blessingModal.style.opacity = '1';
+                    modalContent.style.transform = 'scale(1)';
+                }, 10);
+                fetchBlessing();
+            });
+
+            const closeModal = () => {
+                if (!blessingModal || !modalContent) return;
+                blessingModal.style.opacity = '0';
+                modalContent.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    blessingModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            };
+
+            closeModalBtn.addEventListener('click', closeModal);
+            generateAnotherBtn.addEventListener('click', fetchBlessing);
+
+            copyBlessingBtn.addEventListener('click', () => {
+                if (!blessingOutput) return;
+                const textToCopy = blessingOutput.innerText;
+                const textArea = document.createElement("textarea");
+                textArea.value = textToCopy;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '0';
+                textArea.style.left = '0';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopyFeedback();
+                } catch (err) {
+                    console.error('Fallback: Oops, unable to copy', err);
+                }
+                document.body.removeChild(textArea);
+            });
+
+            function showCopyFeedback() {
+                if (!copyFeedback) return;
+                copyFeedback.style.opacity = '1';
+                setTimeout(() => {
+                    copyFeedback.style.opacity = '0';
+                }, 2000);
+            }
+
+            // --- BACKGROUND MUSIC ---
+            let audioInitialized = false;
+
+            enterBtn.addEventListener('click', async () => {
+                // Fade out the entry modal
+                entryModal.style.opacity = '0';
+                setTimeout(() => {
+                    entryModal.style.display = 'none';
+                }, 300);
+
+                // Fade in the main content
+                mainContent.classList.remove('hidden-fade');
+                mainContent.classList.add('visible-fade');
+
+                if (typeof Tone === 'undefined') {
+                    console.error("Tone.js has not loaded yet.");
+                    return;
+                }
+
+                if (!audioInitialized) {
+                    await Tone.start();
+                    
+                    const reverb = new Tone.Reverb(0.5).toDestination();
+                    const vibrato = new Tone.Vibrato("8n", 0.1).connect(reverb);
+
+                    const synth = new Tone.FMSynth({
+                        harmonicity: 1.5,
+                        modulationIndex: 10,
+                        oscillator: { type: "sine" },
+                        envelope: { attack: 0.01, decay: 0.2, sustain: 0.3, release: 1 },
+                        modulation: { type: "sine" },
+                        modulationEnvelope: { attack: 0.2, decay: 0.1, sustain: 0.5, release: 0.1 }
+                    }).connect(vibrato);
+
+                    const melody = [
+                        { time: "0:0", note: "G4", duration: "4n" }, { time: "0:1", note: "A4", duration: "4n" },
+                        { time: "0:2", note: "B4", duration: "2n" }, { time: "1:0", note: "A4", duration: "4n" },
+                        { time: "1:1", note: "G4", duration: "2n." }, { time: "2:0", note: "D5", duration: "4n" },
+                        { time: "2:1", note: "B4", duration: "4n" }, { time: "2:2", note: "A4", duration: "2n" },
+                        { time: "3:0", note: "G4", duration: "2n" }, { time: "3:2", note: "E4", duration: "4n" },
+                        { time: "3:3", note: "G4", duration: "4n" }, { time: "4:0", note: "A4", duration: "2n" },
+                        { time: "4:2", note: "G4", duration: "1m" }
+                    ];
+
+                    const sequence = new Tone.Part((time, value) => {
+                        synth.triggerAttackRelease(value.note, value.duration, time);
+                    }, melody);
+                    sequence.loop = true;
+                    sequence.loopEnd = '5m';
+                    
+                    Tone.Transport.start();
+                    sequence.start(0);
+                    
+                    audioInitialized = true;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
