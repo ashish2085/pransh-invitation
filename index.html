@@ -94,6 +94,7 @@
             top: -20px;
             animation: fall linear infinite;
             opacity: 0.7;
+            z-index: -1;
         }
         @keyframes fall {
             to {
@@ -240,7 +241,7 @@
     <!-- Blessing Modal -->
     <div id="blessingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full modal-content">
-            <h3 class="font-marcellus text-2xl font-bold mb-4 text-amber-800">A Blessing for Pransh</h3>
+            <h3 id="blessingModalTitle" class="font-marcellus text-2xl font-bold mb-4 text-amber-800" data-lang-en="A Blessing for Pransh" data-lang-hi="प्रांश के लिए एक आशीर्वाद">A Blessing for Pransh</h3>
             <div id="blessingOutput" class="text-lg text-gray-700 mb-6 min-h-[100px]">
                 <!-- Loading spinner -->
                 <div id="loadingSpinner" class="flex justify-center items-center h-full">
@@ -311,6 +312,7 @@
             // --- GEMINI API BLESSING GENERATOR ---
             const generateBlessingBtn = document.getElementById('generateBlessingBtn');
             const blessingModal = document.getElementById('blessingModal');
+            const blessingModalTitle = document.getElementById('blessingModalTitle');
             const closeModalBtn = document.getElementById('closeModalBtn');
             const blessingOutput = document.getElementById('blessingOutput');
             const loadingSpinner = document.getElementById('loadingSpinner');
@@ -319,15 +321,17 @@
             const copyFeedback = document.getElementById('copyFeedback');
             const modalContent = blessingModal ? blessingModal.querySelector('.modal-content') : null;
 
-            async function fetchBlessing() {
+            async function fetchBlessing(lang) {
                 if (!blessingOutput || !loadingSpinner) return;
                 blessingOutput.innerHTML = '';
                 loadingSpinner.style.display = 'flex';
                 blessingOutput.appendChild(loadingSpinner);
-                const prompt = "Generate a short, warm, and heartfelt blessing (around 30-50 words) for a baby boy named Pransh on his Annaprashan (first rice-eating ceremony). The tone should be joyous and auspicious.";
+                
+                const langInstruction = lang === 'hi' ? 'in Hindi' : 'in English';
+                const prompt = `Generate a short, warm, and heartfelt blessing (around 30-50 words) for a baby boy named Pransh on his Annaprashan (first rice-eating ceremony). The tone should be joyous and auspicious. Please provide the blessing ${langInstruction}.`;
+                
                 try {
-                    // NOTE: This requires a valid API key to function when deployed.
-                    const apiKey = "AIzaSyBqPrWge3ac8H7wwlLFIxbcs945odoNPik"; // The environment will handle the key.
+                    const apiKey = ""; // Replace with your API key for deployment
                     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
                     const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
                     if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
@@ -355,7 +359,7 @@
                     blessingModal.style.opacity = '1';
                     modalContent.style.transform = 'scale(1)';
                 }, 10);
-                fetchBlessing();
+                fetchBlessing(currentLang);
             });
 
             const closeModal = () => {
@@ -369,7 +373,7 @@
             };
 
             closeModalBtn.addEventListener('click', closeModal);
-            generateAnotherBtn.addEventListener('click', fetchBlessing);
+            generateAnotherBtn.addEventListener('click', () => fetchBlessing(currentLang));
 
             copyBlessingBtn.addEventListener('click', () => {
                 if (!blessingOutput) return;
@@ -427,7 +431,6 @@
                         const target = el.querySelector('.lang-switch') || el;
                         target.innerHTML = text;
                         
-                        // Handle font switching for specific elements
                         const isTitle = el.id === 'title-annaprashan';
                         const isName = el.id === 'title-pransh';
                         const isFooterName = el.dataset.langEn === "Mrs. Priyanka & Mr. Ashish Kumar";
@@ -438,17 +441,13 @@
                             if (isTitle || isFooterName) {
                                 el.classList.add('font-hindi');
                             } else if (isName) {
-                                el.classList.add('font-tangerine'); // Pransh stays Tangerine
+                                el.classList.add('font-tangerine');
                             } else {
                                 el.classList.add('font-marcellus');
                             }
-                        } else { // lang === 'en'
-                             if (isTitle) {
+                        } else {
+                             if (isTitle || isName) {
                                 el.classList.add('font-tangerine');
-                            } else if (isName) {
-                                el.classList.add('font-tangerine');
-                            } else if (isFooterName) {
-                                el.classList.add('font-marcellus'); // Back to Marcellus for English
                             } else {
                                 el.classList.add('font-marcellus');
                             }
@@ -511,6 +510,7 @@
             // --- PETAL ANIMATION ---
             function createPetals() {
                 const container = document.getElementById('petal-container');
+                if (!container) return;
                 const petalCount = 20;
                 for (let i = 0; i < petalCount; i++) {
                     const petal = document.createElement('div');
