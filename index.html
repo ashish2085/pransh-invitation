@@ -15,7 +15,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            overflow: hidden; /* Hide scrollbars from petal animation */
+            overflow-x: hidden; /* Allow vertical scroll, hide horizontal */
         }
         .font-tangerine {
             font-family: 'Tangerine', cursive;
@@ -159,8 +159,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             <span class="lang-switch">Date & Time</span>
                         </h3>
-                        <p class="text-lg ml-9" data-lang-en="<strong>September 10, 2025</strong>" data-lang-hi="<strong>१० सितंबर, २०२५</strong>"><strong>September 10, 2025</strong></p>
-                        <p class="text-md ml-9" data-lang-en="11:00 AM onwards" data-lang-hi="सुबह ११:०० बजे से">11:00 AM onwards</p>
+                        <p class="text-lg ml-9 font-marcellus" data-lang-en="<strong>September 10, 2025</strong>" data-lang-hi="<strong>10 सितंबर, 2025</strong>"><strong>September 10, 2025</strong></p>
+                        <p class="text-md ml-9 font-marcellus" data-lang-en="11:00 AM onwards" data-lang-hi="सुबह 11:00 बजे से">11:00 AM onwards</p>
                     </div>
                     <!-- Venue -->
                     <div class="text-left">
@@ -168,8 +168,8 @@
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                              <span class="lang-switch">Venue</span>
                         </h3>
-                        <p class="text-lg ml-9" data-lang-en="<strong>Manorama Marriage Hall</strong>" data-lang-hi="<strong>मनोरमा मैरिज हॉल</strong>"><strong>Manorama Marriage Hall</strong></p>
-                        <p class="text-md ml-9" data-lang-en="G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343" data-lang-hi="जी.टी. रोड कुल्टी, कुल्टी कॉलेज बस स्टैंड के पास, कुल्टी - ७१३३४३">G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343</p>
+                        <p class="text-lg ml-9 font-marcellus" data-lang-en="<strong>Manorama Marriage Hall</strong>" data-lang-hi="<strong>मनोरमा मैरिज हॉल</strong>"><strong>Manorama Marriage Hall</strong></p>
+                        <p class="text-md ml-9 font-marcellus" data-lang-en="G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343" data-lang-hi="जी.टी. रोड कुल्टी, कुल्टी कॉलेज बस स्टैंड के पास, कुल्टी - 713343">G.T Road Kulti, Near Kulti College Bus Stand, Kulti - 713343</p>
                     </div>
                 </div>
             </div>
@@ -180,8 +180,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-amber-800"><path d="m21.21 15.89-1.21-7.2 1.42-1.42a2 2 0 0 0 0-2.82l-1.17-1.17a2 2 0 0 0-2.82 0L16 4.71l-7.2-1.21a.5.5 0 0 0-.57.57l1.21 7.2-1.42 1.42a2 2 0 0 0 0 2.82l1.17 1.17a2 2 0 0 0 2.82 0L15.89 15l7.2 1.21a.5.5 0 0 0 .57-.57z"></path><path d="m11 4-2 2"></path><path d="m20 13-2 2"></path><path d="m5 19-2 2"></path></svg>
                     <span class="lang-switch">Dress Code</span>
                 </h3>
-                <p class="text-lg" data-lang-en="Traditional or Smart Casual" data-lang-hi="पारंपरिक या स्मार्ट कैजुअल">Traditional or Smart Casual</p>
-                <p class="text-md" data-lang-en="Bright colors welcome, please avoid black attire" data-lang-hi="चमकीले रंगों का स्वागत है, काले परिधान से बचें">Bright colors welcome, please avoid black attire</p>
+                <p class="text-lg font-marcellus" data-lang-en="Traditional or Smart Casual" data-lang-hi="पारंपरिक या स्मार्ट कैजुअल">Traditional or Smart Casual</p>
+                <p class="text-md font-marcellus" data-lang-en="Bright colors welcome, please avoid black attire" data-lang-hi="चमकीले रंगों का स्वागत है, काले परिधान से बचें">Bright colors welcome, please avoid black attire</p>
             </div>
 
             <!-- Traditional Blessing -->
@@ -217,8 +217,8 @@
 
             <!-- Action Buttons -->
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-on-load">
-                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md" data-lang-en="Add to Calendar" data-lang-hi="कैलेंडर में जोड़ें">Add to Calendar</a>
-                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md" data-lang-en="View on Map" data-lang-hi="नक्शे पर देखें">View on Map</a>
+                <a id="addToCalendar" href="#" target="_blank" class="inline-block bg-amber-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-900 transition duration-300 shadow-md font-marcellus" data-lang-en="Add to Calendar" data-lang-hi="कैलेंडर में जोड़ें">Add to Calendar</a>
+                <a href="https://www.google.com/maps?q=Manorama+Marriage+Hall,G.T+Road+Kulti,Kulti" target="_blank" class="inline-block bg-gray-200 text-amber-800 font-bold py-3 px-8 rounded-lg hover:bg-gray-300 transition duration-300 shadow-md font-marcellus" data-lang-en="View on Map" data-lang-hi="नक्शे पर देखें">View on Map</a>
             </div>
 
         </div>
@@ -226,8 +226,8 @@
         <!-- Footer -->
         <footer class="bg-amber-800/10 p-6 text-center animate-on-load">
             <p class="font-marcellus text-lg" data-lang-en="With love and joy," data-lang-hi="प्यार और खुशी के साथ,">With love and joy,</p>
-            <p class="text-xl font-semibold text-amber-800" data-lang-en="Mrs. Priyanka & Mr. Ashish Kumar" data-lang-hi="श्रीमती प्रियंका एवं श्री आशीष कुमार">Mrs. Priyanka & Mr. Ashish Kumar</p>
-            <p class="font-marcellus text-md text-amber-800/80 mt-2" data-lang-en="Contact: +91 7209412085" data-lang-hi="संपर्क: +९१ ७२०९४१२०८५">Contact: +91 7209412085</p>
+            <p class="text-xl font-semibold text-amber-800 font-marcellus" data-lang-en="Mrs. Priyanka & Mr. Ashish Kumar" data-lang-hi="श्रीमती प्रियंका एवं श्री आशीष कुमार">Mrs. Priyanka & Mr. Ashish Kumar</p>
+            <p class="font-marcellus text-md text-amber-800/80 mt-2" data-lang-en="Contact: +91 7209412085" data-lang-hi="संपर्क: +91 7209412085">Contact: +91 7209412085</p>
         </footer>
     </div>
 
