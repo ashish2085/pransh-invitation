@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annaprashan Ceremony of Pransh</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.min.js"></script>
+    <!-- Tone.js script removed as it's no longer needed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Tangerine:wght@700&family=Marcellus&display=swap" rel="stylesheet">
@@ -190,6 +190,20 @@
         </div>
     </div>
 
+    <!-- Audio Player -->
+    <audio id="background-music" loop>
+        <!-- 
+          IMPORTANT: REPLACE THE 'src' LINK BELOW with the direct link to your MP3 file from GitHub.
+          To get the link: 
+          1. Go to your MP3 file on GitHub.
+          2. Click the "Download" or "Raw" button.
+          3. Copy the URL from your browser's address bar.
+          4. Paste it below, replacing the placeholder.
+        -->
+        <source src="https://github.com/ashish2085/pransh-invitation/blob/main/krishnaflu-pa2luqdy-37180.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
 
     <script>
         window.addEventListener('load', () => {
@@ -197,6 +211,7 @@
             const entryModal = document.getElementById('entryModal');
             const enterBtn = document.getElementById('enterBtn');
             const mainContent = document.getElementById('mainContent');
+            const backgroundMusic = document.getElementById('background-music');
 
             // --- COUNTDOWN TIMER LOGIC ---
             const countdownDate = new Date("September 10, 2025 11:00:00").getTime();
@@ -321,9 +336,7 @@
             }
 
             // --- BACKGROUND MUSIC ---
-            let audioInitialized = false;
-
-            enterBtn.addEventListener('click', async () => {
+            enterBtn.addEventListener('click', () => {
                 // Fade out the entry modal
                 entryModal.style.opacity = '0';
                 setTimeout(() => {
@@ -334,47 +347,10 @@
                 mainContent.classList.remove('hidden-fade');
                 mainContent.classList.add('visible-fade');
 
-                if (typeof Tone === 'undefined') {
-                    console.error("Tone.js has not loaded yet.");
-                    return;
-                }
-
-                if (!audioInitialized) {
-                    await Tone.start();
-                    
-                    const reverb = new Tone.Reverb(0.5).toDestination();
-                    const vibrato = new Tone.Vibrato("8n", 0.1).connect(reverb);
-
-                    const synth = new Tone.FMSynth({
-                        harmonicity: 1.5,
-                        modulationIndex: 10,
-                        oscillator: { type: "sine" },
-                        envelope: { attack: 0.01, decay: 0.2, sustain: 0.3, release: 1 },
-                        modulation: { type: "sine" },
-                        modulationEnvelope: { attack: 0.2, decay: 0.1, sustain: 0.5, release: 0.1 }
-                    }).connect(vibrato);
-
-                    const melody = [
-                        { time: "0:0", note: "G4", duration: "4n" }, { time: "0:1", note: "A4", duration: "4n" },
-                        { time: "0:2", note: "B4", duration: "2n" }, { time: "1:0", note: "A4", duration: "4n" },
-                        { time: "1:1", note: "G4", duration: "2n." }, { time: "2:0", note: "D5", duration: "4n" },
-                        { time: "2:1", note: "B4", duration: "4n" }, { time: "2:2", note: "A4", duration: "2n" },
-                        { time: "3:0", note: "G4", duration: "2n" }, { time: "3:2", note: "E4", duration: "4n" },
-                        { time: "3:3", note: "G4", duration: "4n" }, { time: "4:0", note: "A4", duration: "2n" },
-                        { time: "4:2", note: "G4", duration: "1m" }
-                    ];
-
-                    const sequence = new Tone.Part((time, value) => {
-                        synth.triggerAttackRelease(value.note, value.duration, time);
-                    }, melody);
-                    sequence.loop = true;
-                    sequence.loopEnd = '5m';
-                    
-                    Tone.Transport.start();
-                    sequence.start(0);
-                    
-                    audioInitialized = true;
-                }
+                // Play the background music
+                backgroundMusic.play().catch(error => {
+                    console.error("Audio playback failed:", error);
+                });
             });
         });
     </script>
